@@ -1,21 +1,23 @@
-cotract People {
+pragma solidity ^0.4.0;
+contract People {
+ Person[] public people;
 struct Person {
-string firstName;
-string lastName
-unit age;
+bytes32 firstName;
+bytes32 lastName;
+uint age;
 }
-function addPerson(string _firstName, string_lastName, unit _age) returns (bool success){
+function addPerson(bytes32 _firstName, bytes32 _lastName, uint _age) returns (bool success){
 // memory- can store in state
-// carving out new struct slash memmory for array
+// carving out new struct slash memory for array
 Person memory newPerson;
 newPerson.firstName = _firstName;
 newPerson.lastName = _lastName;
-newPerson = _age;
+newPerson.age = _age;
 
 people.push(newPerson);
 return true;
 //saves to blockchain "push" changes state
-return true
+return true;
 
 }
 //getter
@@ -29,15 +31,16 @@ return true
 //to be very careful while looping functions because it's possible if
 //you're looping over say say an array in that array gets too long then you can
 //run out of gas
-//
-
-function getPeople() constant returns (string[],string[],unit[]){
-bytes32[] firstNames;
-byte32[] lastNames;
-unit[] ages;
 
 
-for (uinit = i; i < people.length; i++){
+function getPeople() constant returns (bytes32[],bytes32[],uint[]){
+uint length = people.length;
+bytes32[] memory firstNames = new bytes32[](length);
+bytes32[] memory lastNames = new bytes32[](length);
+uint[] memory ages = new uint[](length);
+
+
+for (uint  i = 0; i < people.length; i++){
 
 // we're going to do is we're going to loop over the ra
 //we're going to create a new person structure and in memory and we're going
@@ -47,9 +50,15 @@ for (uinit = i; i < people.length; i++){
 
 Person memory currentPerson;
 currentPerson = people[i];
-firstName.push(currentPerson.firstName);
-last.Name
+
+firstNames[i] = currentPerson.firstName;
+
+lastNames[i] = currentPerson.firstName;
+
+ages[i] = currentPerson.age;
+
 }
+return (firstNames,lastNames,ages);
 
 }
 }
